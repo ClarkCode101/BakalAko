@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="tl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#17352F" />
+    <meta name="description" content="Remote para sa walk-through metal detector" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Detector" />
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <title>Detector Remote</title>
+  </head>
+  <body>
+    <div id="app" class="app">
+      <div id="demo-banner" class="demo-banner" hidden>
+        <strong>Demo mode</strong> · pekeng detector ito, hindi totoong koneksyon
+      </div>
+
+      <header class="top">
+        <h1 class="title">Detector Remote</h1>
+        <span id="link-pill" class="pill" data-tone="off">Hindi connected</span>
+      </header>
+
+      <main class="main">
+        <section class="gate-card" aria-label="Mga coil ng gate">
+          <div id="gate" class="gate"></div>
+        </section>
+
+        <section id="status" class="status" data-tone="off">
+          <div role="status" aria-live="polite" aria-atomic="true">
+            <p id="status-main" class="status-main"></p>
+            <div id="status-sub" class="status-sub"></div>
+          </div>
+          <div id="status-actions" class="status-actions"></div>
+        </section>
+
+        <section class="card sens">
+          <div class="sens-head">
+            <label for="sens" class="sens-label">Sensitivity</label>
+            <output id="sens-value" for="sens" class="sens-value">–</output>
+          </div>
+          <input
+            id="sens"
+            class="sens-slider"
+            type="range"
+            min="0"
+            max="58"
+            step="1"
+            value="48"
+            aria-describedby="sens-help"
+          />
+          <div class="sens-scale" aria-hidden="true">
+            <span>Mas mahina</span><span>Mas sensitive</span>
+          </div>
+          <p id="sens-help" class="hint">
+            Threshold: <span id="sens-th">–</span>. Mas sensitive = nahuhuli ang mas maliit na metal, pero mas
+            madaling mag-false alarm.
+          </p>
+        </section>
+
+        <section id="demo-tools" class="card demo-tools" hidden>
+          <h2 class="card-title">Subukan ang mga estado</h2>
+          <div class="demo-grid">
+            <button type="button" class="btn btn-secondary" data-demo="drop">Putulin ang koneksyon</button>
+            <button type="button" class="btn btn-secondary" data-demo="fail">Pumalyang koneksyon</button>
+            <button type="button" class="btn btn-secondary" data-demo="silent">Patahimikin ang detector</button>
+            <button type="button" class="btn btn-secondary" data-demo="exit">Lumabas sa demo</button>
+          </div>
+        </section>
+
+        <p class="hint footnote">
+          Standby lang ang Power sa selpon: titigil ang pulse at buzzer, pero gising pa rin ang Arduino at
+          Bluetooth. Para tuluyang patayin, gamitin ang switch ng battery.
+          <button id="btn-disconnect" type="button" class="link-btn" hidden>Idiskonekta</button>
+        </p>
+      </main>
+
+      <nav class="controls" aria-label="Mga control ng detector">
+        <button id="btn-power" type="button" class="btn btn-power" aria-pressed="false">
+          <span class="btn-main">Power</span>
+          <span id="power-sub" class="btn-sub">–</span>
+        </button>
+        <button id="btn-restart" type="button" class="btn btn-restart">
+          <span class="btn-main">I-restart</span>
+          <span class="btn-sub">Mag-calibrate ulit</span>
+        </button>
+      </nav>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
